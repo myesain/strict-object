@@ -2,8 +2,6 @@
 /**
  * Myesain\Strict\StrictTrait file
  *
- *
- *
  * @copyright 	2016 myesain
  * @since 		2016-07-16
  */
@@ -14,11 +12,6 @@ use Myesain\Strict\Exception\NonExistentPropertyException;
 
 trait StrictTrait
 {
-	/**
-	 * @var array - defines public properties that should be exposed
-	 */
-	// protected $properties = array();
-
 	/**
 	 * @var array - contains current values for properties
 	 */
@@ -37,11 +30,11 @@ trait StrictTrait
 
 		foreach ($this->properties as $prop) {
 
-			$value = isset($data[$prop]) ? $data[$prop] : "";
+			if (!isset($data[$prop])) {
+				continue;
+			}
 
-			// if ($value && in_array($prop, $this->dateProperties) && !($value instanceof \DateTime)) {
-			// 	$value = new \DateTime($value);
-			// }
+			$value = isset($data[$prop]) ? $data[$prop] : "";
 
 			$this->values[$prop] = ($value) ? $value : "";
 		}
@@ -50,18 +43,17 @@ trait StrictTrait
 	public function __set($name, $value)
 	{
 		if (!in_array($name, $this->properties)) {
-			throw new NonExistentPropertyException("Property {$name} not a valid property");
+			throw new NonExistentPropertyException("Property {$name} not a valid property of " . get_class($this));
 		}
-
-		// if (in_array($name, $this->dateProperties) && !($value instanceof \DateTime)) {
-		// 	$value = new \DateTime($value);
-		// }
 
 		$this->values[$name] = $value;
 	}
 
 	public function &__get($name)
 	{
+		if (!in_array($name, $this->properties)) {
+			throw new NonExistentPropertyException("Property {$name} not a valid property of " . get_class($this));
+		}
 		return $this->values[$name];
 	}
 
@@ -73,16 +65,5 @@ trait StrictTrait
 	public function __unset($name)
 	{
 		unset($this->values[$name]);
-	}
-
-	public function jsonSerialize()
-	{
-		$content = new \StdClass;
-
-		foreach ($this->properties as $property) {
-			$content->$property = $this->values[$property];
-		}
-
-		return $content;
 	}
 }

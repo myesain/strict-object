@@ -1,6 +1,6 @@
 <?php
 /**
- * Myesain\Strict\StrictTrait PHPUnit Test Case File
+ * Myesain\Strict\StrictTraitTest PHPUnit Test Case File
  *
  * @copyright 	2016 myesain
  * @since 		2016-07-16
@@ -8,17 +8,15 @@
 
 namespace Myesain\Strict\Test;
 
-use Myesain\Strict\StrictTrait;
+use Myesain\Strict\StrictObject;
 
-class MyObject
+class MyObject extends StrictObject
 {
 	protected $properties = array(
 		'id',
 		'name',
 		'title',
 	);
-
-	use \Myesain\Strict\StrictTrait;
 }
 
 class StrictTraitTest extends \PHPUnit_Framework_TestCase
@@ -43,6 +41,15 @@ class StrictTraitTest extends \PHPUnit_Framework_TestCase
 		$this->setExpectedException("Myesain\Strict\Exception\NonExistentPropertyException");
 
 		$object->nonExistentProperty = "some value";
+	}
+
+	public function testUsingTraitAttemptingToGetInvalidPropertyThrowsException()
+	{
+		$object = new MyObject();
+
+		$this->setExpectedException("Myesain\Strict\Exception\NonExistentPropertyException");
+
+		$value = $object->nonExistentProperty;
 	}
 
 	public function testUsingTraitHydratingWithValidPropertiesHydratesProperly()
@@ -78,6 +85,40 @@ class StrictTraitTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(12, $object->id);
 		$this->assertEquals("myesain", $object->name);
 		$this->assertEquals("Overlord", $object->title);
+	}
 
+	public function testUsingTraitHydratingWithEmptyArrayCausesNoSideEffects()
+	{
+		$data = array();
+
+		$object = new MyObject();
+
+		$object->hydrate($data);
+
+		$this->assertTrue(true);
+	}
+
+	public function testIssetOnTraitedObjectReturnsFalseIfPropertyNotSetAndTrueAfterPropertSet()
+	{
+		$object = new MyObject();
+
+		$this->assertFalse(isset($object->id));
+
+		$object->id = 12;
+
+		$this->assertTrue(isset($object->id));
+	}
+
+	public function testUnsetOnPropertySuccessfullyUnsetsTheProperty()
+	{
+		$object = new MyObject();
+
+		$object->id = 12;
+
+		$this->assertTrue(isset($object->id));
+
+		unset($object->id);
+
+		$this->assertFalse(isset($object->id));
 	}
 }
