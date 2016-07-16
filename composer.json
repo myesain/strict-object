@@ -1,7 +1,7 @@
 {
       "name"        : "myesain/strict-object"
     , "description" : "PHP package to make object properties more reliable - receive exception when accessing un-defined properties in your code"
-    , "keywords"    : ["debug", "debugger", "OOP", "reliability", "exception"]
+    , "keywords"    : ["debug", "debugger", "OOP", "reliability", "exception", "array access"]
     , "homepage"    : "https://github.com/myesain/strict-object"
     , "license"     : "MIT"
     , "authors"     : [
