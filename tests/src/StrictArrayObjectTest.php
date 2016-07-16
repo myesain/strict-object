@@ -117,7 +117,7 @@ class StrictArrayObjectTest extends \PHPUnit_Framework_TestCase
 
 
 	/* Countable Interface */
-	public function testCountReturnsNumberOfProperties()
+	public function testCountReturnsNumberOfSetProperties()
 	{
 		$object = new MyArrayObject();
 

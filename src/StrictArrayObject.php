@@ -20,7 +20,6 @@ abstract class StrictArrayObject extends StrictObject implements \ArrayAccess, \
 	 */
 	public function offsetExists($offset)
 	{
-		// return in_array($offset, $this->properties);
 		return array_key_exists($offset, $this->values);
 	}
 

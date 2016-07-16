@@ -32,7 +32,7 @@ class StrictObjectTest extends \PHPUnit_Framework_TestCase
 			'title' => 'Overlord',
 		);
 
-		$object = new MyObject($data);
+		$object = new MyNewObject($data);
 
 		$this->assertEquals(12, $object->id);
 		$this->assertEquals("myesain", $object->name);

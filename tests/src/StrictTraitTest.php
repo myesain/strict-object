@@ -11,15 +11,17 @@
 
 namespace Myesain\Strict\Test;
 
-use Myesain\Strict\StrictObject;
+use Myesain\Strict\StrictTrait;
 
-class MyObject extends StrictObject
+class MyObject
 {
 	protected $properties = array(
 		'id',
 		'name',
 		'title',
 	);
+
+	use StrictTrait;
 }
 
 class StrictTraitTest extends \PHPUnit_Framework_TestCase
