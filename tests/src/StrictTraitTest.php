@@ -2,6 +2,9 @@
 /**
  * Myesain\Strict\StrictTraitTest PHPUnit Test Case File
  *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
  * @copyright 	2016 myesain
  * @since 		2016-07-16
  */

@@ -2,6 +2,9 @@
 /**
  * Myesain\Strict\StrictArrayObject file
  *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
  * @copyright 	2016 myesain
  * @since 		2016-07-16
  */
@@ -56,7 +59,7 @@ abstract class StrictArrayObject extends StrictObject implements \ArrayAccess, \
 	 */
 	public function count()
 	{
-		return count($this->properties);
+		return count($this->values);
 	}
 
 	/**
@@ -64,12 +67,6 @@ abstract class StrictArrayObject extends StrictObject implements \ArrayAccess, \
 	 */
 	public function getIterator()
 	{
-		// $returnArray = array();
-
-		// foreach ($this->properties as $property) {
-		// 	$returnArray[$property] = (isset($this->values[$property])) ? $this->values[$property] : null;
-		// }
-
 		return new \ArrayIterator($this->values);
 	}
 }

@@ -2,6 +2,9 @@
 /**
  * Myesain\Strict\StrictObjectTest PHPUnit Test Case File
  *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
  * @copyright 	2016 myesain
  * @since 		2016-07-16
  */
@@ -118,7 +121,23 @@ class StrictArrayObjectTest extends \PHPUnit_Framework_TestCase
 	{
 		$object = new MyArrayObject();
 
-		$this->assertEquals(3, count($object));
+		$this->assertEquals(0, count($object));
+
+		$object['id'] = 12;
+
+		$this->assertEquals(1, count($object));
+
+		$object['name'] = "myesain";
+
+		$this->assertEquals(2, count($object));
+
+		unset($object['name']);
+
+		$this->assertEquals(1, count($object));
+
+		unset($object['id']);
+
+		$this->assertEquals(0, count($object));
 	}
 
 
