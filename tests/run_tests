@@ -1,0 +1,68 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Executes the Myesain\Strict PHPUnit test suite
+ *
+ * Allows easy specification of common test suite parameters to provide an easier way to run the tests
+ *
+ * @package 	Myesain\Strict
+ * @since 		2016-07-16
+ */
+
+chdir(dirname(__FILE__));
+
+$report 		= "";
+
+$argWphp 		= "";
+$argWTestPhp 	= "";
+
+$numArgs 		= $argc;
+$curArg 		= 0;
+
+$lastArg 		= false;
+
+foreach ($argv as $arg)
+{
+	$curArg++;
+
+	// Skip the first arg; it will always be the name of this script
+	if ($curArg === 1)
+	{
+		continue;
+	}
+
+	if ($arg == "--help")
+	{
+		$scriptName = basename(__FILE__, ".php");
+		echo <<<EOH
+Myesian\Strict PHPUnit Test Suite Runner
+
+Usage:  $scriptName [Options]
+
+Options:
+    --report     Generate html code coverage report in coverage directory
+
+
+Miscellaneous Options:
+    --help      Display this help and exit
+
+EOH;
+		exit;
+	}
+
+	if ($arg == "--report")
+	{
+		$report = "--coverage-html coverage";
+		continue;
+	}
+
+	echo "
+Unknown argument: {$arg}
+
+Exiting...
+
+";
+	exit;
+}
+
+passthru("../vendor/bin/phpunit --colors=always {$report} ./");
