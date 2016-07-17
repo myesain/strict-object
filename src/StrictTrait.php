@@ -27,6 +27,8 @@ trait StrictTrait
 	 */
 	public function hydrate(array $data)
 	{
+		$this->values = array();
+
 		if (!$data) {
 			return;
 		}
@@ -46,7 +48,7 @@ trait StrictTrait
 	public function __set($name, $value)
 	{
 		if (!in_array($name, $this->properties)) {
-			throw new NonExistentPropertyException("Property {$name} not a valid property of " . get_class($this));
+			throw new NonExistentPropertyException("Property '{$name}' not a valid property of " . get_class($this));
 		}
 
 		$this->values[$name] = $value;
@@ -55,7 +57,7 @@ trait StrictTrait
 	public function &__get($name)
 	{
 		if (!in_array($name, $this->properties)) {
-			throw new NonExistentPropertyException("Property {$name} not a valid property of " . get_class($this));
+			throw new NonExistentPropertyException("Property '{$name}' not a valid property of " . get_class($this));
 		}
 		return $this->values[$name];
 	}

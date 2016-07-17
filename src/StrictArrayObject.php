@@ -29,7 +29,7 @@ abstract class StrictArrayObject extends StrictObject implements \ArrayAccess, \
 	public function offsetGet($offset)
 	{
 		if (!in_array($offset, $this->properties)) {
-			throw new NonExistentPropertyException("Property {$offset} not a valid property of " . get_class($this));
+			throw new NonExistentPropertyException("Property '{$offset}' not a valid property of " . get_class($this));
 		}
 		return $this->values[$offset];
 	}
@@ -40,7 +40,7 @@ abstract class StrictArrayObject extends StrictObject implements \ArrayAccess, \
 	public function offsetSet($offset, $value)
 	{
 		if (!in_array($offset, $this->properties)) {
-			throw new NonExistentPropertyException("Property {$offset} not a valid property of " . get_class($this));
+			throw new NonExistentPropertyException("Property '{$offset}' not a valid property of " . get_class($this));
 		}
 		$this->values[$offset] = $value;
 	}
