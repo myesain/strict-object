@@ -62,7 +62,7 @@ $post = new BlogPost();
 $post->title = "Very Engaging Title";
 
 $post->cotnent = "[...] more engaging content [...]";
-// Myesain\Strict\Exception\NonExistentPropertyException thrown: Property 'content' not a valid property of BlogPost
+// Myesain\Strict\Exception\NonExistentPropertyException thrown: Property 'cotnent' not a valid property of BlogPost
 ```
 
 ## Installation
