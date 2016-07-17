@@ -123,11 +123,11 @@ $user->hydrate($userData);
 
 ```
 
-Any `$_POST` values that correspond to the entries in the `$properties` array of the `User` object will be properly populated.
-
-#### Type-Hinting
+Any `$userData` values that correspond to the entries in the `$properties` array of the `User` object will be properly populated.
 
 Even though there is little difference in how our application can access the data for our `User` object (`$user->userId` vs `$_POST['userId']`), we've gained some very helpful capabilities.
+
+#### Type-Hinting
 
 Perhaps most importantly, we can type-hint against our `User` class now and be assured we can access properly named properties.
 
@@ -181,7 +181,7 @@ $addressRepository->saveAddress($address);
 
 $orderProcessor->processCreditCardPayment($creditCard);
 ```
-Here, the `$addressRepository` wouldn't be able to access the (arguably) more sensitive payment card information and the `$orderProcessor` won't be able to inadvertently affect the shiping address information, but we maintain a simple API into both of them.
+Here, the `$addressRepository` wouldn't be able to access the (arguably) more sensitive payment card information and the `$orderProcessor` won't be able to inadvertently affect the shipping address information, but we maintain a simple API into both of them.
 
 ### Extending `Myesain\Strict\StrictObject`
 
@@ -256,7 +256,7 @@ Old habits die hard, and if developers are excited about the features of the lib
 
 #### Refactoring
 
-Existing code can be updated to take advantage of many features of the library can be accomplished without having to update all of the business logic surrounding it. For example, a method expecting an array of data as it's argument can be easily refactored to take advantage of the type-hinting and data-privacy features of the library.
+Existing code can be updated to take advantage of many features of the library without having to update all of the business logic surrounding it. For example, a method expecting an array of data as it's argument can be easily refactored to take advantage of the type-hinting and data-privacy features of the library.
 
 First, create the new class:
 
